@@ -1,0 +1,27 @@
+<nav class="navbar navbar-dark bg-dark px-4">
+    <a class="navbar-brand" href="#">Crypto Paper Trading</a>
+    <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+</nav>
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>Welcome to Dashboard</h4>
+        </div>
+
+        <div class="card-body">
+            <!-- Sử dụng currentUser() vì đây là Signal -->
+             <div *ngIf="currentUser() as user">
+                <p><strong>Username:</strong> {{ user.username }} </p>
+                <p><strong>Email:</strong> {{ user.email }} </p>
+                <p><strong>Role:</strong> {{ user.role }} </p>
+                <p><strong>Token:</strong> {{ user.token.substring(0, 20) }}... </p>
+
+                <hr>
+                <p class="text-muted">
+                    Hệ thống giao dịch đang được xây dựng...
+                </p>
+             </div>
+        </div>
+    </div>
+</div>

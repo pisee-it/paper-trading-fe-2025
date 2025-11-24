@@ -3,10 +3,13 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  // Phải import RouterOutlet thì HTML mới hiểu thẻ <router-outlet>
   imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('PiSeeTrading_fe');
+  // protected readonly title = signal('PiSeeTrading_fe');
+  title = 'crypto-paper-trading'
 }
