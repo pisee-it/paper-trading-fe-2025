@@ -1,0 +1,303 @@
+// ============================================
+// 1. VARIABLES (Đồng bộ với Login)
+// ============================================
+$primary-color: #fcd535; // Binance Yellow
+$primary-hover: #f0b90b;
+$text-main: #1e2329;
+$text-light: #707a8a;
+$bg-body: #fafafa;
+$bg-white: #ffffff;
+$border-color: #eaecef;
+$error-color: #dc3545;
+$success-color: #198754; // Thêm màu xanh cho thông báo thành công
+$border-radius: 8px;
+$transition: all 0.2s ease-in-out;
+
+// ============================================
+// 2. GLOBAL LAYOUT
+// ============================================
+.register-page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: $text-main;
+  background-color: $bg-body;
+}
+
+// ============================================
+// 3. HEADER STYLES (Y hệt Login)
+// ============================================
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: $bg-white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+
+  .header-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      color: $text-main;
+      .logo-icon {
+        color: $primary-color;
+        font-size: 1.5rem;
+      }
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 24px;
+      .nav-link {
+        text-decoration: none;
+        color: $text-main;
+        font-weight: 500;
+        transition: $transition;
+        &:hover {
+          color: $primary-hover;
+        }
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .tool-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      color: $text-main;
+      &:hover {
+        color: $primary-hover;
+      }
+
+      .tool-icon {
+        font-size: 1.2rem;
+      }
+      .tool-text {
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .dropdown-menu-custom {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 12px;
+        background: $bg-white;
+        border-radius: $border-radius;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        min-width: 160px;
+        border: 1px solid $border-color;
+        .dropdown-item {
+          padding: 10px 16px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+          font-size: 0.9rem;
+          &:hover {
+            background-color: $bg-body;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// 4. MAIN BODY & AUTH CARD
+// ============================================
+.hero-section {
+  flex: 1;
+  margin-top: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  // background: url(...) -> Thêm ảnh nền ở đây nếu muốn
+
+  .auth-card-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: flex-end; // Form nằm bên phải
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+  }
+}
+
+.auth-card {
+  background: $bg-white;
+  width: 100%;
+  max-width: 500px; // Rộng hơn form Login chút xíu (500px) vì nhiều trường hơn
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+
+  .card-header {
+    margin-bottom: 24px;
+    .welcome-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .sub-text {
+      color: $text-light;
+      font-size: 1rem;
+    }
+  }
+
+  // --- Styles cho Form Inputs ---
+  .form-group {
+    margin-bottom: 20px;
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      height: 48px;
+      padding: 0 12px;
+      transition: $transition;
+
+      &:focus-within {
+        border-color: $primary-color;
+        box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+      }
+
+      .input-icon {
+        color: $text-light;
+        font-size: 1.2rem;
+        margin-right: 12px;
+      }
+
+      .form-control {
+        border: none;
+        outline: none;
+        flex: 1;
+        height: 100%;
+        font-size: 1rem;
+        color: $text-main;
+        background: transparent;
+        &::placeholder {
+          color: lighten($text-light, 20%);
+        }
+        &.is-invalid {
+          color: $error-color;
+        }
+      }
+
+      .btn-toggle-pass {
+        background: none;
+        border: none;
+        color: $text-light;
+        cursor: pointer;
+        padding: 4px;
+        &:hover {
+          color: $text-main;
+        }
+      }
+    }
+
+    .error-msg {
+      color: $error-color;
+      font-size: 0.85rem;
+      margin-top: 6px;
+      display: block;
+    }
+  }
+
+  // --- Button & Links ---
+  .btn-submit {
+    width: 100%;
+    height: 50px;
+    background-color: $primary-color;
+    color: $text-main;
+    border: none;
+    border-radius: $border-radius;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $transition;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover:not(:disabled) {
+      background-color: $primary-hover;
+      transform: translateY(-1px);
+    }
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .register-prompt {
+    margin-top: 24px;
+    text-align: center;
+    color: $text-light;
+    font-size: 0.95rem;
+    a {
+      color: $primary-hover;
+      text-decoration: none;
+      font-weight: 700;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // --- Alert Success Custom ---
+  .alert-success {
+    background-color: lighten($success-color, 50%);
+    border-color: lighten($success-color, 40%);
+    color: darken($success-color, 10%);
+    .btn-primary {
+      background-color: $success-color;
+      border: none;
+      &:hover {
+        background-color: darken($success-color, 5%);
+      }
+    }
+  }
+}
