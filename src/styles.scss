@@ -1,3 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+/* =========================================
+   GLOBAL VARIABLES - QUẢN LÝ BACKGROUND TẠI ĐÂY
+   ========================================= */
+:root {
+  // 1. Đường dẫn ảnh nền (Thay đổi 1 lần, ăn cả App)
+  --app-bg-image: url('/assets/images/bg-auth.jpg');
+
+  // 2. Màu lớp phủ (Overlay): Đen mờ 60%
+  // Giúp chữ trắng dễ đọc trên nền ảnh phức tạp
+  --app-bg-overlay: rgba(0, 0, 0, 0.6);
+}
+
+/* Reset mặc định để đảm bảo full chiều cao */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: transparent !important; /* Quan trọng: Đảm bảo body trong suốt */
+}

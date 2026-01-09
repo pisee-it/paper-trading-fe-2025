@@ -1,13 +1,14 @@
 // ============================================
-// 1. VARIABLES (GIỮ NGUYÊN ĐỂ KHÔNG LỖI)
+// 1. VARIABLES
 // ============================================
 $primary-color: #52b36e;
 $primary-hover: #389452;
-$text-main: #1e2329;
-$text-light: #707a8a;
-$bg-body: #fafafa;
+$text-main: #e8f2ff;
+$text-light: #a0a6b1;
+$text-dropdown: #222222;
 $bg-white: #ffffff;
-$border-color: #eaecef;
+$bg-body: #fafafa;
+$border-color: rgba(255, 255, 255, 0.2);
 $error-color: #dc3545;
 $border-radius: 8px;
 $transition: all 0.2s ease-in-out;
@@ -21,62 +22,174 @@ $transition: all 0.2s ease-in-out;
   min-height: 100vh;
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   color: $text-main;
-  background-color: $bg-body;
+  background-color: transparent !important; /* Đổi thành trong suốt */
 }
 
-// *** ĐÃ XÓA SECTION .site-header ĐỂ TRÁNH TRÙNG LẶP ***
-
 // ============================================
-// 4. MAIN HERO SECTION (QUAN TRỌNG: margin-top: 64px giữ nguyên để tránh bị Header che)
+// 4. HERO SECTION (UPDATED FOR LANDING PAGE)
 // ============================================
 .hero-section {
   flex: 1;
-  // margin-top: 64px; // Giữ lại cái này là quan trọng nhất
-  padding-top: 80px;
+  padding-top: 80px; // Tránh Header
+  padding-bottom: 40px;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: center; // Căn giữa theo chiều dọc
   justify-content: center;
-  padding: 40px 20px;
-  position: relative; // Cần thiết để lớp phủ hoạt động
+  position: relative;
 
-  // --- CẤU HÌNH BACKGROUND ---
-  background-image: url('/assets/images/bg-auth.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  // ---------------------
-
-  .login-card-wrapper {
+  // --- CONTAINER CHÍNH CHỨA 2 CỘT ---
+  .content-container {
     width: 100%;
     max-width: 1200px;
-    display: flex;
-    justify-content: flex-end;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
 
-    @media (max-width: 768px) {
-      justify-content: center;
+    display: flex;
+    justify-content: space-between; // Đẩy 2 cột ra xa nhau
+    align-items: center; // Căn giữa dọc
+    gap: 60px; // Khoảng cách giữa chữ và form
+
+    // Responsive: Trên mobile thì xếp chồng lên nhau
+    @media (max-width: 992px) {
+      flex-direction: column;
+      gap: 40px;
+      .landing-message {
+        text-align: center;
+        align-items: center;
+        margin-top: 20px;
+      }
     }
   }
 }
 
 // ============================================
-// 5. LOGIN CARD COMPONENT
+// 5. LANDING MESSAGE (CỘT TRÁI - MỚI)
+// ============================================
+.landing-message {
+  flex: 1;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .main-headline {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+    .highlight-text {
+      color: $primary-color;
+      position: relative;
+
+      // Gạch chân nghệ thuật
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background: rgba($primary-color, 0.2);
+        z-index: -1;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .sub-headline {
+    font-size: 1.15rem;
+    color: #dbe4f3;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 90%;
+  }
+
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 32px;
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .icon-box {
+        width: 48px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $primary-color;
+        font-size: 1.4rem;
+        backdrop-filter: blur(5px);
+      }
+
+      .text {
+        h6 {
+          margin: 0;
+          font-weight: 700;
+          font-size: 1rem;
+          color: $text-main;
+        }
+        span {
+          font-size: 0.9rem;
+          color: $text-light;
+        }
+      }
+    }
+  }
+
+  .cta-group {
+    .btn-outline-light {
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      &:hover {
+        background: $primary-color;
+        border-color: $primary-color;
+        color: #fff;
+      }
+    }
+  }
+}
+
+// ============================================
+// 6. LOGIN CARD WRAPPER (CỘT PHẢI)
+// ============================================
+.login-card-wrapper {
+  width: 100%;
+  max-width: 460px; // Giới hạn chiều rộng Form
+  flex-shrink: 0; // Không cho co lại
+}
+
+// ============================================
+// 7. LOGIN CARD STYLE (GLASS EFFECT)
 // ============================================
 .login-card {
-  background: $bg-white;
+  background-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
   width: 100%;
-  max-width: 440px;
   padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border-radius: 20px; // Bo góc tròn hơn chút cho hiện đại
 
   .card-header {
     margin-bottom: 32px;
-
     .welcome-text {
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 8px;
+      color: $text-main;
     }
     .sub-text {
       color: $text-light;
@@ -93,6 +206,7 @@ $transition: all 0.2s ease-in-out;
       margin-bottom: 8px;
       font-weight: 600;
       font-size: 0.95rem;
+      color: $text-main;
     }
 
     .input-group {
@@ -103,10 +217,12 @@ $transition: all 0.2s ease-in-out;
       height: 48px;
       padding: 0 12px;
       transition: $transition;
+      background-color: rgba(0, 0, 0, 0.2);
 
       &:focus-within {
         border-color: $primary-color;
         box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+        background-color: rgba(0, 0, 0, 0.3);
       }
 
       .input-icon {
@@ -123,9 +239,8 @@ $transition: all 0.2s ease-in-out;
         font-size: 1rem;
         color: $text-main;
         background: transparent;
-
         &::placeholder {
-          color: lighten($text-light, 20%);
+          color: rgba($text-main, 0.5);
         }
         &.is-invalid {
           color: $error-color;
@@ -139,7 +254,6 @@ $transition: all 0.2s ease-in-out;
         cursor: pointer;
         padding: 4px;
         transition: $transition;
-
         &:hover {
           color: $text-main;
         }
@@ -160,20 +274,23 @@ $transition: all 0.2s ease-in-out;
     align-items: center;
     margin-bottom: 24px;
     font-size: 0.9rem;
-
+    color: $text-light;
     .remember-me {
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
+      input {
+        accent-color: $primary-color;
+      }
     }
-
     .forgot-pass {
-      color: $primary-hover;
+      color: $primary-color;
       text-decoration: none;
       font-weight: 600;
       &:hover {
         text-decoration: underline;
+        color: lighten($primary-color, 10%);
       }
     }
   }
@@ -182,7 +299,7 @@ $transition: all 0.2s ease-in-out;
     width: 100%;
     height: 50px;
     background-color: $primary-color;
-    color: $text-main;
+    color: #ffffff;
     border: none;
     border-radius: $border-radius;
     font-size: 1.1rem;
@@ -198,7 +315,6 @@ $transition: all 0.2s ease-in-out;
       background-color: $primary-hover;
       transform: translateY(-1px);
     }
-
     &:disabled {
       opacity: 0.6;
       cursor: not-allowed;
@@ -210,13 +326,83 @@ $transition: all 0.2s ease-in-out;
     text-align: center;
     color: $text-light;
     font-size: 0.95rem;
-
     a {
-      color: $primary-hover;
+      color: $primary-color;
       text-decoration: none;
       font-weight: 700;
       &:hover {
         text-decoration: underline;
+        color: lighten($primary-color, 10%);
+      }
+    }
+  }
+  // 1. Divider (Đường kẻ ngang)
+  // 1. Divider (Giữ nguyên không đổi)
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    margin: 24px 0 24px; // Tăng khoảng cách dưới lên xíu cho thoáng
+
+    span {
+      padding: 0 12px;
+      color: rgba($text-main, 0.6);
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  // 2. Social Buttons Group (HÌNH TRÒN)
+  .social-login-group {
+    display: flex; // Dùng Flex để các nút tròn không bị méo
+    justify-content: center; // Căn giữa 3 nút vào giữa form
+    gap: 20px; // Khoảng cách giữa các nút
+    margin-bottom: 24px;
+
+    .btn-social {
+      width: 50px; // Chiều rộng cố định
+      height: 50px; // Chiều cao bằng chiều rộng -> Hình vuông
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid transparent;
+
+      border-radius: 50%; // QUAN TRỌNG: Biến hình vuông thành hình tròn
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: $transition;
+
+      // Kích thước ảnh Logo
+      img {
+        width: 24px;
+        height: 24px;
+      }
+
+      // Icon Font (Apple)
+      i {
+        font-size: 1.4rem;
+        color: #1a1a1a;
+        line-height: 1;
+        margin-top: -2px; // Chỉnh icon Apple lên xíu cho cân giữa
+      }
+
+      // Hover Effect (Nổi lên)
+      &:hover {
+        background-color: #ffffff;
+        transform: translateY(-3px); // Nảy lên cao hơn xíu
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); // Bóng đổ sâu hơn
+      }
+
+      &:active {
+        transform: translateY(0);
       }
     }
   }

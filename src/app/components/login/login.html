@@ -1,68 +1,124 @@
 <div class="login-page-container">
     <main class="hero-section">
-        <div class="login-card-wrapper">
-            <section class="login-card">
-                <header class="card-header">
-                    <h1 class="welcome-text">Đăng nhập</h1>
-                    <p class="sub-text">Tiếp tục hành trình đầu tư của bạn</p>
-                </header>
 
-                <div *ngIf="errorMessage" class="alert alert-danger d-flex align-items-center mb-3" role="alert">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    <div>{{ errorMessage }}</div>
+        <div class="content-container">
+
+            <div class="landing-message">
+                <h1 class="main-headline">
+                    Làm chủ thị trường <br>
+                    <span class="highlight-text">Crypto</span> không rủi ro
+                </h1>
+                <p class="sub-headline">
+                    Nền tảng Paper Trading số 1 dành cho người mới.
+                    Tặng ngay <strong>$10,000</strong> tài khoản Demo để thực chiến với dữ liệu thật.
+                </p>
+
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="icon-box"><i class="bi bi-graph-up-arrow"></i></div>
+                        <div class="text">
+                            <h6>Dữ liệu Real-time</h6>
+                            <span>Cập nhật giá chính xác từng giây</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon-box"><i class="bi bi-shield-check"></i></div>
+                        <div class="text">
+                            <h6>An toàn tuyệt đối</h6>
+                            <span>Thử nghiệm chiến lược không sợ lỗ vốn</span>
+                        </div>
+                    </div>
                 </div>
 
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                    <div class="form-group">
-                        <label for="username" class="form-label">Tên đăng nhập</label>
-                        <div class="input-group">
-                            <i class="bi bi-person input-icon"></i>
-                            <input type="text" id="username" class="form-control" formControlName="username"
-                                placeholder="Nhập tên đăng nhập"
-                                [class.is-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
-                        </div>
-                        <small class="error-msg"
-                            *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
-                            Tên đăng nhập không được để trống (tối thiểu 3 ký tự).
-                        </small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="form-label">Mật khẩu</label>
-                        <div class="input-group">
-                            <i class="bi bi-lock input-icon"></i>
-                            <input [type]="showPassword ? 'text' : 'password'" id="password" class="form-control"
-                                formControlName="password" placeholder="Nhập mật khẩu"
-                                [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-
-                            <button type="button" class="btn-toggle-pass" (click)="togglePassword()"
-                                aria-label="Hiện/Ẩn mật khẩu">
-                                <i class="bi" [class.bi-eye-slash]="showPassword" [class.bi-eye]="!showPassword"></i>
-                            </button>
-                        </div>
-                        <small class="error-msg"
-                            *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-                            Mật khẩu không được để trống (tối thiểu 6 ký tự).
-                        </small>
-                    </div>
-
-                    <div class="form-actions">
-                        <label class="remember-me">
-                            <input type="checkbox"> Ghi nhớ
-                        </label>
-                        <a href="#" class="forgot-pass">Quên mật khẩu?</a>
-                    </div>
-
-                    <button type="submit" class="btn-submit" [disabled]="loginForm.invalid || isLoading">
-                        <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
-                        <span *ngIf="!isLoading">Đăng nhập ngay</span>
+                <div class="cta-group">
+                    <button class="btn btn-outline-light rounded-pill px-4 py-2 fw-bold">
+                        <i class="bi bi-play-circle me-2"></i> Xem hướng dẫn
                     </button>
+                </div>
+            </div>
 
-                    <div class="register-prompt">
-                        Chưa có tài khoản? <a routerLink="/register">Đăng ký miễn phí</a>
+            <div class="login-card-wrapper">
+                <section class="login-card">
+                    <header class="card-header">
+                        <h1 class="welcome-text">Đăng nhập</h1>
+                        <p class="sub-text">Tiếp tục hành trình đầu tư của bạn</p>
+                    </header>
+
+                    <div *ngIf="errorMessage" class="alert alert-danger d-flex align-items-center mb-3" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <div>{{ errorMessage }}</div>
                     </div>
-                </form>
-            </section>
+
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <label for="username" class="form-label">Tên đăng nhập</label>
+                            <div class="input-group">
+                                <i class="bi bi-person input-icon"></i>
+                                <input type="text" id="username" class="form-control" formControlName="username"
+                                    placeholder="Nhập tên đăng nhập"
+                                    [class.is-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                            </div>
+                            <small class="error-msg"
+                                *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                                Tên đăng nhập không được để trống (tối thiểu 3 ký tự).
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <div class="input-group">
+                                <i class="bi bi-lock input-icon"></i>
+                                <input [type]="showPassword ? 'text' : 'password'" id="password" class="form-control"
+                                    formControlName="password" placeholder="Nhập mật khẩu"
+                                    [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+
+                                <button type="button" class="btn-toggle-pass" (click)="togglePassword()"
+                                    aria-label="Hiện/Ẩn mật khẩu">
+                                    <i class="bi" [class.bi-eye-slash]="showPassword"
+                                        [class.bi-eye]="!showPassword"></i>
+                                </button>
+                            </div>
+                            <small class="error-msg"
+                                *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                                Mật khẩu không được để trống (tối thiểu 6 ký tự).
+                            </small>
+                        </div>
+
+                        <div class="form-actions">
+                            <label class="remember-me">
+                                <input type="checkbox"> Ghi nhớ
+                            </label>
+                            <a href="#" class="forgot-pass">Quên mật khẩu?</a>
+                        </div>
+
+                        <button type="submit" class="btn-submit" [disabled]="loginForm.invalid || isLoading">
+                            <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+                            <span *ngIf="!isLoading">Đăng nhập ngay</span>
+                        </button>
+
+                        <div class="register-prompt">
+                            Chưa có tài khoản? <a routerLink="/register">Đăng ký miễn phí</a>
+                            <div class="auth-divider">
+                                <span>Hoặc tiếp tục với</span>
+                            </div>
+
+                            <div class="social-login-group">
+                                <button type="button" class="btn-social">
+                                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+                                </button>
+
+                                <button type="button" class="btn-social">
+                                    <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" alt="Facebook">
+                                </button>
+
+                                <button type="button" class="btn-social">
+                                    <i class="bi bi-apple"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
         </div>
     </main>
 </div>

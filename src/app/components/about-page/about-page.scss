@@ -1,0 +1,236 @@
+// ============================================
+// 1. VARIABLES
+// ============================================
+$primary-green: #52b36e;
+$text-main: #e8f2ff;
+$text-light: #a0a6b1;
+$bg-glass: rgba(255, 255, 255, 0.1);
+$border-glass: rgba(255, 255, 255, 0.15);
+$transition: all 0.3s ease;
+
+// ============================================
+// 2. LAYOUT & TYPOGRAPHY
+// ============================================
+.about-page-container {
+  padding-top: 100px; // Tránh Header
+  padding-bottom: 60px;
+  min-height: 100vh;
+  color: $text-main;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+
+  .content-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  p {
+    line-height: 1.7;
+    color: #dbe4f3;
+    font-size: 1.05rem;
+  }
+}
+
+// ============================================
+// 3. SECTIONS STYLING
+// ============================================
+
+// --- HERO SECTION ---
+.about-hero {
+  margin-bottom: 80px;
+  animation: fadeInDown 0.8s ease-out;
+
+  .main-title {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+    .highlight {
+      color: $primary-green;
+      position: relative;
+      display: inline-block;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 100%;
+        height: 12px;
+        background: rgba($primary-green, 0.2);
+        z-index: -1;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .sub-title {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: $text-light;
+  }
+}
+
+// --- GLASS CARD MIXIN (Dùng chung) ---
+.glass-card {
+  background: rgba(255, 255, 255, 0.08); // Kính tối hơn chút cho trang trọng
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid $border-glass;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: $transition;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  &.highlight-border {
+    border: 1px solid rgba($primary-green, 0.5);
+    box-shadow: 0 0 30px rgba($primary-green, 0.15);
+  }
+}
+
+// --- MISSION SECTION ---
+.mission-section {
+  margin-bottom: 80px;
+  .section-heading {
+    color: $primary-green;
+    margin-bottom: 20px;
+  }
+  .text-primary-gradient {
+    background: linear-gradient(45deg, $primary-green, #82e8a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 6rem; // Icon to
+  }
+}
+
+// --- VALUES SECTION ---
+.values-section {
+  margin-bottom: 80px;
+
+  .value-card {
+    @extend .glass-card; // Kế thừa style kính
+    height: 100%;
+    text-align: center;
+    padding: 30px 20px;
+
+    .icon-box {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      background: rgba($primary-green, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $primary-green;
+      font-size: 1.8rem;
+      border: 1px solid rgba($primary-green, 0.3);
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+    }
+    p {
+      font-size: 0.95rem;
+      color: $text-light;
+      margin-bottom: 0;
+    }
+  }
+}
+
+// --- TECH SECTION ---
+.tech-section {
+  margin-bottom: 80px;
+
+  .tech-icons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+
+    .tech-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: $text-light;
+      transition: $transition;
+
+      i {
+        font-size: 2.5rem;
+        transition: $transition;
+      }
+      span {
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      &:hover {
+        color: $text-main;
+        i {
+          color: $primary-green;
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}
+
+// --- CTA SECTION ---
+.cta-section {
+  margin-bottom: 60px;
+
+  .btn-primary-gradient {
+    background: linear-gradient(90deg, $primary-green, darken($primary-green, 10%));
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    transition: $transition;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba($primary-green, 0.4);
+    }
+  }
+}
+
+// ANIMATION
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// RESPONSIVE
+@media (max-width: 768px) {
+  .about-hero .main-title {
+    font-size: 2.5rem;
+  }
+  .tech-icons {
+    gap: 20px;
+  }
+  .glass-card {
+    padding: 24px;
+  }
+}

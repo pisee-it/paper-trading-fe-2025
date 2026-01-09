@@ -5,33 +5,60 @@
                 <i class="bi bi-currency-exchange logo-icon"></i>
                 <span class="brand-name">PiSee Trading</span>
             </a>
-
             <nav class="main-nav">
-                <!-- <a href="#" class="nav-link">Tài khoản ảo 10k$</a> -->
                 <a routerLink="/market" class="nav-link" style="cursor: pointer;">Thị trường</a>
-                <a href="#" class="nav-link">Về chúng tôi</a>
+                <a routerLink="/about-us" class="nav-link">Về chúng tôi</a>
             </nav>
         </div>
 
         <div class="header-right">
+
             <div class="tool-item" (click)="toggleLanguageMenu()">
                 <i class="bi bi-globe tool-icon"></i>
-                <span class="tool-text">Tiếng Việt</span>
-
+                <span class="tool-text d-none d-sm-block">Tiếng Việt</span>
                 <div class="dropdown-menu-custom" *ngIf="showLanguageMenu" (click)="$event.stopPropagation()">
                     <div class="dropdown-item" (click)="switchLanguage('vi')">
-                        <img src="https://flagcdn.com/vn.svg" width="20" alt="VN Flag"> Tiếng Việt
+                        <img src="https://flagcdn.com/vn.svg" width="20" alt="VN"> Tiếng Việt
                     </div>
                     <div class="dropdown-item" (click)="switchLanguage('en')">
-                        <img src="https://flagcdn.com/us.svg" width="20" alt="US Flag"> English
+                        <img src="https://flagcdn.com/us.svg" width="20" alt="US"> English
                     </div>
                 </div>
             </div>
 
-            <div class="tool-item" (click)="toggleDarkMode()" aria-label="Toggle Dark Mode">
-                <i class="bi tool-icon" [class.bi-sun-fill]="!isDarkMode" [class.bi-moon-stars-fill]="isDarkMode"></i>
-                <span class="tool-text">{{ isDarkMode ? 'Tối' : 'Sáng' }}</span>
+            <div class="auth-buttons" *ngIf="!isLoggedIn">
+                <a routerLink="/login" class="btn-auth-login">Đăng nhập</a>
+                <a routerLink="/register" class="btn-auth-register">Đăng ký</a>
             </div>
+
+            <div class="user-profile-wrapper" *ngIf="isLoggedIn()" (click)="toggleUserMenu()">
+                <div class="avatar-circle">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+
+                <div class="dropdown-menu-custom user-menu" *ngIf="showUserMenu" (click)="$event.stopPropagation()">
+                    <div class="user-info-header">
+                        <span class="user-name">{{ userName() }}</span>
+                        <span class="user-email">{{ userEmail() }}</span>
+                    </div>
+
+                    <hr class="dropdown-divider">
+
+                    <a routerLink="/profile" class="dropdown-item">
+                        <i class="bi bi-person-circle me-2"></i> Hồ sơ cá nhân
+                    </a>
+                    <a routerLink="/settings" class="dropdown-item">
+                        <i class="bi bi-gear me-2"></i> Cài đặt
+                    </a>
+
+                    <hr class="dropdown-divider">
+
+                    <div class="dropdown-item text-danger" (click)="logout()">
+                        <i class="bi bi-box-arrow-right me-2"></i> Đăng xuất
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </header>

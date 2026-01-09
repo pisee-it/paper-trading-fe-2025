@@ -1,55 +1,115 @@
-// --- VARIABLES ---
+// ============================================
+// 1. VARIABLES (ĐỒNG BỘ GLASSMORPHISM)
+// ============================================
 $primary-green: #52b36e;
-$text-main: #1e2329;
-$bg-body: #fafafa;
+$text-main: #e8f2ff; // Chữ sáng
+$text-light: #a0a6b1; // Chữ phụ
+$bg-glass: rgba(255, 255, 255, 0.1); // Kính mờ
+$border-glass: rgba(255, 255, 255, 0.15); // Viền kính
+$transition: all 0.2s ease-in-out;
 
+// ============================================
+// 2. DASHBOARD CONTAINER
+// ============================================
 .dashboard-container {
   padding-top: 100px;
   min-height: 100vh;
-  background-color: $bg-body;
+
+  // QUAN TRỌNG: Xóa background-color đi để hiện hình nền Global
+  background-color: transparent;
 }
 
-// Custom Text Color
+// ============================================
+// 3. TEXT STYLES
+// ============================================
 .text-main {
   color: $text-main;
 }
-.text-primary-custom {
-  color: $primary-green !important;
+.sub-text {
+  color: $text-light;
 }
 
-// Custom Button
+.text-highlight {
+  color: $primary-green;
+  text-shadow: 0 0 20px rgba($primary-green, 0.3); // Glow nhẹ
+}
+
+// ============================================
+// 4. USER SUMMARY CARD (GLASS EFFECT)
+// ============================================
+.user-summary-card {
+  background-color: $bg-glass;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid $border-glass;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  .card-label {
+    color: $text-light;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .demo-tag {
+    color: rgba($text-main, 0.5);
+    font-style: italic;
+  }
+}
+
+// ============================================
+// 5. BUTTONS
+// ============================================
 .btn-primary-custom {
   background-color: $primary-green;
-  border-color: $primary-green;
+  border: 1px solid $primary-green;
   color: white;
   font-weight: 600;
   padding: 10px 24px;
-  border-radius: 8px;
-  transition: all 0.2s;
+  border-radius: 10px;
+  transition: $transition;
 
   &:hover {
     background-color: darken($primary-green, 5%);
-    border-color: darken($primary-green, 5%);
+    box-shadow: 0 0 15px rgba($primary-green, 0.4);
     transform: translateY(-1px);
   }
 }
 
-// User Card Styling
-.user-summary-card {
-  border-radius: 16px;
-  background: white;
-}
-
-// Search box
+// ============================================
+// 6. SEARCH BOX (GLASS INPUT)
+// ============================================
 .search-box {
+  position: relative;
+
   input {
+    background-color: rgba(0, 0, 0, 0.2); // Nền input tối mờ
+    border: 1px solid $border-glass;
     border-radius: 20px;
-    padding-left: 15px;
-    border: 1px solid #eaecef;
-    width: 200px;
+    padding-left: 35px; // Chừa chỗ cho icon
+    padding-right: 15px;
+    width: 240px;
+    color: $text-main;
+    transition: $transition;
+
+    &::placeholder {
+      color: rgba($text-main, 0.5);
+    }
+
     &:focus {
+      background-color: rgba(0, 0, 0, 0.4);
       border-color: $primary-green;
       box-shadow: 0 0 0 2px rgba($primary-green, 0.2);
     }
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-light;
+    pointer-events: none;
   }
 }

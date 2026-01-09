@@ -61,12 +61,16 @@ export class AuthService {
 
   // --- HELPER METHODS ---
   private saveSession(user: AuthResponse): void {
-    // Cập nhật Signal
+    // 1. Cập nhật Signal (để giao diện phản ứng ngay lập tức)
     this.currentUser.set(user);
 
-    // Lưu vào SessionStorage (chỉ chạy ở Browser để tránh lỗi SSR)
+    // 2. Lưu vào Storage (để F5 không mất) - Chỉ chạy ở Browser
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.setItem(this.TOKEN_KEY, user.token);
+
+      // --- DÒNG CẦN THÊM ---
+      // Phải lưu thông tin User (dạng JSON string) thì Constructor mới đọc lại được
+      sessionStorage.setItem(this.USER_KEY, JSON.stringify(user));
     }
   }
 

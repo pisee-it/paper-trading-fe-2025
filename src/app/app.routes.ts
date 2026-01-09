@@ -7,6 +7,7 @@ import { MarketPage } from './components/market/market-page';
 
 // 1. Import Layout Component (bạn kiểm tra lại đường dẫn import này cho đúng với cấu trúc folder của bạn nhé)
 import { MainLayoutComponent } from './components/main-layout/main-layout';
+import { AboutPage } from './components/about-page/about-page';
 
 export const routes: Routes = [
   {
@@ -38,6 +39,11 @@ export const routes: Routes = [
       {
         path: 'market',
         component: MarketPage,
+      },
+
+      {
+        path: 'about-us',
+        component: AboutPage,
       },
 
       // --- Redirect mặc định ---

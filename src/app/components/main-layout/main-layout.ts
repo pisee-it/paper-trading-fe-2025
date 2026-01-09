@@ -15,21 +15,47 @@ import { HeaderComponent } from '../header/header';
   template: `
     <app-header></app-header>
 
+    <div class="global-background"></div>
+
     <main class="main-wrapper">
       <router-outlet></router-outlet>
     </main>
   `,
   styles: [
     `
-      .main-wrapper {
-        /* 1. XÓA dòng padding-top: 80px cũ đi */
-        /* padding-top: 80px; <--- XÓA hoặc Comment lại */
+      /* Nền cố định */
+      .global-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -100; /* Số âm lớn để chắc chắn nằm dưới cùng */
 
-        /* 2. Giữ nguyên các thuộc tính khác */
-        min-height: 100vh;
-        background-color: #fafafa;
-        box-sizing: border-box;
+        /* GHI CỨNG ĐƯỜNG DẪN TẠI ĐÂY ĐỂ TRÁNH LỖI BIẾN */
+        background-image: url('/assets/images/bg-auth.jpg');
+
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      /* Lớp phủ màu đen mờ */
+      .global-background::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6); /* Đen mờ 60% */
+        z-index: -99; /* Nằm trên ảnh nền 1 chút */
+      }
+
+      .main-wrapper {
+        position: relative;
         width: 100%;
+        min-height: 100vh;
       }
     `,
   ],
