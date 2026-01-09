@@ -245,6 +245,15 @@ $transition: all 0.2s ease-in-out;
         &.is-invalid {
           color: $error-color;
         }
+        // --- FIX AUTOFILL VÀO ĐÂY ---
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+          -webkit-text-fill-color: $text-main !important;
+          transition: background-color 5000s ease-in-out 0s;
+          -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+        }
       }
 
       .btn-toggle-pass {

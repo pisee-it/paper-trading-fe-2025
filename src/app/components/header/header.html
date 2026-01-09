@@ -26,10 +26,10 @@
                 </div>
             </div>
 
-            <div class="auth-buttons" *ngIf="!isLoggedIn">
+            <!-- <div class="auth-buttons" *ngIf="!isLoggedIn()">
                 <a routerLink="/login" class="btn-auth-login">Đăng nhập</a>
                 <a routerLink="/register" class="btn-auth-register">Đăng ký</a>
-            </div>
+            </div> -->
 
             <div class="user-profile-wrapper" *ngIf="isLoggedIn()" (click)="toggleUserMenu()">
                 <div class="avatar-circle">
@@ -53,7 +53,7 @@
 
                     <hr class="dropdown-divider">
 
-                    <div class="dropdown-item text-danger" (click)="logout()">
+                    <div class="dropdown-item text-danger" (click)="initiateLogout($event)">
                         <i class="bi bi-box-arrow-right me-2"></i> Đăng xuất
                     </div>
                 </div>
@@ -62,3 +62,18 @@
         </div>
     </div>
 </header>
+
+<div class="logout-modal-overlay" *ngIf="showLogoutModal">
+    <div class="logout-modal-card">
+        <div class="modal-icon">
+            <i class="bi bi-exclamation-circle"></i>
+        </div>
+        <h3>Xác nhận đăng xuất</h3>
+        <p>Bạn có chắc chắn muốn kết thúc phiên làm việc này không?</p>
+
+        <div class="modal-actions">
+            <button class="btn-cancel" (click)="cancelLogout()">Hủy bỏ</button>
+            <button class="btn-confirm" (click)="confirmLogout()">Đăng xuất ngay</button>
+        </div>
+    </div>
+</div>

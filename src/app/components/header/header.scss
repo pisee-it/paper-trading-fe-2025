@@ -3,15 +3,17 @@
 // ============================================
 $primary-color: #52b36e;
 $primary-hover: #389452;
-$text-main: #e8f2ff;
-$text-light: #707a8a;
-$text-dropdown: #222222;
-$bg-white: #ffffff;
+$text-main: #e8f2ff; // Chữ sáng (cho Header)
+$text-light: #a0a6b1; // Chữ phụ
+$text-dropdown: #e8f2ff; // [MỚI] Chữ sáng cho Dropdown
 $bg-body: #fafafa;
-$border-color: #eaecef;
-$error-color: #dc3545;
-$border-radius: 8px;
+$border-color: rgba(255, 255, 255, 0.15); // Viền kính
+$error-color: #ff6b6b; // Màu đỏ tươi hơn cho nền tối
 $transition: all 0.2s ease-in-out;
+
+// [MỚI] Biến màu riêng cho Dropdown tối
+$bg-dropdown: rgba(26, 29, 36, 0.95);
+$bg-dropdown-hover: rgba(255, 255, 255, 0.1);
 
 // ============================================
 // 2. HEADER STYLES
@@ -28,11 +30,10 @@ $transition: all 0.2s ease-in-out;
   padding: 0 24px;
 
   // --- GLASS EFFECT BACKGROUND ---
-  background-color: rgba(255, 255, 255, 0.1); // Nền kính mờ
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.3); // Nền tối hơn chút để nổi menu
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
   .header-content {
     width: 100%;
@@ -68,14 +69,12 @@ $transition: all 0.2s ease-in-out;
     .main-nav {
       display: flex;
       gap: 24px;
-
       .nav-link {
         text-decoration: none;
         color: $text-main;
         font-weight: 500;
         font-size: 0.95rem;
         transition: $transition;
-
         &:hover {
           color: $primary-color;
         }
@@ -83,19 +82,19 @@ $transition: all 0.2s ease-in-out;
     }
   }
 
-  // --- HEADER RIGHT (CHỨA CÁC BUTTON & DROPDOWN) ---
+  // --- HEADER RIGHT ---
   .header-right {
     display: flex;
     align-items: center;
-    gap: 16px; // Khoảng cách cố định giữa các nút
+    gap: 16px;
 
-    // 1. Tool Item (Ngôn ngữ & Darkmode)
+    // 1. Tool Item
     .tool-item {
       display: flex;
       flex-direction: column;
       align-items: center;
       cursor: pointer;
-      position: relative; // Quan trọng để neo dropdown
+      position: relative;
       color: $text-main;
       transition: $transition;
       padding: 0 8px;
@@ -103,7 +102,6 @@ $transition: all 0.2s ease-in-out;
       &:hover {
         color: $primary-color;
       }
-
       .tool-icon {
         font-size: 1.2rem;
       }
@@ -114,13 +112,12 @@ $transition: all 0.2s ease-in-out;
       }
     }
 
-    // Style cho nhóm nút Guest
+    // Guest Buttons
     .auth-buttons {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-left: 12px;
-
       .btn-auth-login {
         text-decoration: none;
         color: $text-main;
@@ -131,7 +128,6 @@ $transition: all 0.2s ease-in-out;
           color: $primary-color;
         }
       }
-
       .btn-auth-register {
         text-decoration: none;
         background-color: $primary-color;
@@ -139,11 +135,10 @@ $transition: all 0.2s ease-in-out;
         font-weight: 600;
         font-size: 0.9rem;
         padding: 8px 20px;
-        border-radius: 20px; // Bo tròn đẹp
+        border-radius: 20px;
         transition: $transition;
-
         &:hover {
-          background-color: $primary-hover;
+          background-color: lighten($primary-color, 5%);
           transform: translateY(-1px);
           box-shadow: 0 4px 12px rgba($primary-color, 0.25);
         }
@@ -152,79 +147,71 @@ $transition: all 0.2s ease-in-out;
 
     // 2. User Profile Wrapper
     .user-profile-wrapper {
-      position: relative; // Quan trọng: Neo dropdown vào đây
+      position: relative;
       margin-left: 12px;
       cursor: pointer;
 
-      // Avatar Circle
       .avatar-circle {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background-color: #f1f3f5;
-        border: 2px solid transparent; // Viền trong suốt mặc định
+        background-color: rgba(255, 255, 255, 0.1); // Nền tròn mờ
+        border: 2px solid transparent;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: $transition;
-        color: $text-light;
+        color: $text-main;
 
         &:hover {
           border-color: $primary-color;
           color: $primary-color;
-          background-color: rgba($primary-color, 0.05);
+          background-color: rgba($primary-color, 0.1);
         }
-
         i {
           font-size: 1.4rem;
-        }
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 50%;
         }
       }
     }
 
     // ===============================================
-    // 3. DROPDOWN MENU CHUNG (Language & User)
+    // 3. DROPDOWN MENU (DARK GLASS STYLE)
     // ===============================================
     .dropdown-menu-custom {
-      position: absolute; // Tuyệt đối: Không chiếm chỗ, không đẩy nút khác
-      top: 100%; // Bắt đầu ngay dưới nút bấm
-      right: 0; // Căn phải thẳng hàng với nút bấm
-      margin-top: 14px; // Tách rời khỏi header (Hiệu ứng bay)
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 14px;
+      min-width: 220px;
 
-      min-width: 200px;
-      background: #ffffff; // Màu nền trắng đặc (Khác màu kính của header)
+      // [CẬP NHẬT] Nền tối mờ thay vì nền trắng
+      background: $bg-dropdown;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
       border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); // Bóng đổ sâu hơn
+      border: 1px solid rgba(255, 255, 255, 0.1); // Viền sáng mờ
 
-      // Shadow đậm để tạo cảm giác nổi (Floating)
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-
-      z-index: 1100; // Luôn nằm trên cùng
-      overflow: visible; // Để hiện được cái tam giác nhọn (arrow)
-
-      // Animation hiện ra nhẹ nhàng
+      z-index: 1100;
+      overflow: visible;
       animation: fadeIn 0.2s ease-out;
 
-      // Mũi tên nhọn trỏ lên (Optional - Cho đẹp)
+      // Mũi tên nhọn (Màu đen khớp nền)
       &::before {
         content: '';
         position: absolute;
         top: -6px;
-        right: 14px; // Căn vị trí mũi tên
+        right: 14px;
         width: 12px;
         height: 12px;
-        background: #ffffff;
+        background: $bg-dropdown; // [CẬP NHẬT] Màu nền mũi tên
         transform: rotate(45deg);
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
-        border-left: 1px solid rgba(0, 0, 0, 0.05);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
       }
 
-      // --- Style cho các item bên trong ---
+      // Dropdown Item
       .dropdown-item {
         padding: 12px 20px;
         display: flex;
@@ -233,47 +220,52 @@ $transition: all 0.2s ease-in-out;
         cursor: pointer;
         font-size: 0.9rem;
         font-weight: 500;
-        color: $text-dropdown;
+
+        color: $text-dropdown; // [CẬP NHẬT] Chữ sáng
+
         transition: all 0.1s;
-        border-radius: 8px; // Bo góc khi hover
-        margin: 4px; // Cách lề một chút cho đẹp
+        border-radius: 8px;
+        margin: 4px;
 
         &:hover {
-          background-color: $bg-body; // Màu xám nhạt khi hover
+          background-color: $bg-dropdown-hover; // Hover sáng mờ
           color: $primary-color;
         }
 
         &.text-danger {
           color: $error-color;
           &:hover {
-            background-color: rgba($error-color, 0.08);
+            background-color: rgba($error-color, 0.1);
           }
         }
       }
 
-      // Divider
       .dropdown-divider {
         margin: 4px 0;
         border: 0;
-        border-top: 1px solid $border-color;
+        border-top: 1px solid rgba(255, 255, 255, 0.1); // Viền phân cách mờ
       }
     }
 
-    // Tùy chỉnh riêng cho User Menu (Rộng hơn)
+    // User Menu Specific
     .user-menu {
       width: 280px;
       padding-bottom: 8px;
 
       .user-info-header {
         padding: 16px 20px;
-        background-color: rgba($primary-color, 0.05); // Nền nhẹ cho phần thông tin
-        border-radius: 12px 12px 0 0; // Bo góc trên
+
+        // [CẬP NHẬT] Nền tối hơn nền dropdown một chút để nổi bật
+        background-color: rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        border-radius: 12px 12px 0 0;
         margin-bottom: 4px;
 
         .user-name {
           display: block;
           font-weight: 700;
-          color: $text-dropdown;
+          color: #fff;
           font-size: 1rem;
         }
         .user-email {
@@ -285,7 +277,6 @@ $transition: all 0.2s ease-in-out;
   }
 }
 
-// Animation
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -294,5 +285,117 @@ $transition: all 0.2s ease-in-out;
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+// ============================================
+// 4. LOGOUT CONFIRM MODAL (STYLE MỚI)
+// ============================================
+.logout-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000; // Cao hơn cả Header (1000)
+
+  // Nền tối mờ che phủ toàn màn hình
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+
+  .logout-modal-card {
+    width: 90%;
+    max-width: 400px;
+    background: #1a1d24; // Nền tối
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    animation: scaleIn 0.2s ease-out;
+
+    // Icon cảnh báo
+    .modal-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      background: rgba($error-color, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        font-size: 2rem;
+        color: $error-color;
+      }
+    }
+
+    h3 {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: $text-light;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+
+      button {
+        flex: 1;
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        border: none;
+        transition: $transition;
+      }
+
+      .btn-cancel {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: $text-light;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          color: #fff;
+        }
+      }
+
+      .btn-confirm {
+        background-color: $error-color;
+        color: #fff;
+        &:hover {
+          background-color: darken($error-color, 5%);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba($error-color, 0.3);
+        }
+      }
+    }
+  }
+}
+
+// Animation cho Modal
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
