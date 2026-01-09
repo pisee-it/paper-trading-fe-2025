@@ -1,27 +1,33 @@
-<nav class="navbar navbar-dark bg-dark px-4">
-    <a class="navbar-brand" href="#">Crypto Paper Trading</a>
-    <button class="btn btn-outline-light" (click)="logout()">Logout</button>
-</nav>
+<div class="dashboard-container">
+    <div class="container py-5">
 
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h4>Welcome to Dashboard</h4>
+        <div class="card user-summary-card mb-5 border-0 shadow-sm">
+            <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="text-muted mb-1">Tổng tài sản ước tính</h5>
+                    <h2 class="display-5 fw-bold text-primary-custom">
+                        $10,000.00 <span class="text-muted fs-6 fw-normal">(Demo)</span>
+                    </h2>
+                </div>
+                <div class="d-none d-md-block">
+                    <button class="btn btn-primary-custom btn-lg shadow-sm">
+                        <i class="bi bi-plus-circle me-2"></i> Nạp tiền ảo
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div class="card-body">
-            <!-- Sử dụng currentUser() vì đây là Signal -->
-             <div *ngIf="currentUser() as user">
-                <p><strong>Username:</strong> {{ user.username }} </p>
-                <p><strong>Email:</strong> {{ user.email }} </p>
-                <p><strong>Role:</strong> {{ user.role }} </p>
-                <p><strong>Token:</strong> {{ user.token.substring(0, 20) }}... </p>
-
-                <hr>
-                <p class="text-muted">
-                    Hệ thống giao dịch đang được xây dựng...
-                </p>
-             </div>
+        <div class="d-flex justify-content-between align-items-end mb-3">
+            <div>
+                <h4 class="fw-bold text-main mb-1">Market Overview</h4>
+                <p class="text-muted mb-0 small">Cập nhật giá thị trường theo thời gian thực</p>
+            </div>
+            <div class="search-box">
+                <input type="text" class="form-control form-control-sm" placeholder="Tìm kiếm coin...">
+            </div>
         </div>
+
+        <app-market-board></app-market-board>
+
     </div>
 </div>

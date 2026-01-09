@@ -1,0 +1,41 @@
+<div class="market-list-container">
+    <div class="market-header d-none d-md-flex">
+        <div class="col-name">Tên Coin</div>
+        <div class="col-price text-end">Giá hiện tại</div>
+        <div class="col-chart text-center">Biểu đồ 24h</div>
+        <div class="col-action text-end">Hành động</div>
+    </div>
+
+    <div class="market-item-row" *ngFor="let coin of coins">
+
+        <div class="col-name">
+            <div class="coin-icon-wrapper">
+                <i class="bi" [class.bi-currency-bitcoin]="coin.id === 'bitcoin'"
+                    [class.bi-currency-exchange]="coin.id !== 'bitcoin'"></i>
+            </div>
+            <div class="coin-info">
+                <span class="symbol">{{ coin.symbol }}</span>
+                <span class="name text-muted">{{ coin.name }}</span>
+            </div>
+        </div>
+
+        <div class="col-price text-end">
+            <div class="price-value">
+                {{ coin.price | currency:'USD':'symbol':'1.2-2' }}
+            </div>
+            <small class="change-percent text-success">
+                <i class="bi bi-arrow-up-short"></i> 2.4%
+            </small>
+        </div>
+
+        <div class="col-chart text-center">
+            <div class="mini-chart-line"></div>
+        </div>
+
+        <div class="col-action text-end">
+            <button class="btn btn-trade">
+                Giao dịch
+            </button>
+        </div>
+    </div>
+</div>

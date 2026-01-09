@@ -1,0 +1,225 @@
+// ============================================
+// 1. VARIABLES
+// ============================================
+$primary-green: #52b36e;
+$bg-hover: #f0fdf4; // Màu xanh rất nhạt để dịu mắt hơn
+$border-color: #eaecef;
+$text-main: #1e2329;
+$text-light: #707a8a;
+$chart-gradient: linear-gradient(90deg, rgba($primary-green, 0.2) 0%, rgba($primary-green, 1) 100%);
+
+// ============================================
+// 2. MARKET LIST STYLES
+// ============================================
+.market-list-container {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid $border-color;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); // Thêm bóng đổ nhẹ cho nổi khối
+
+  // --- HEADER (Tiêu đề cột) ---
+  .market-header {
+    display: flex; // QUAN TRỌNG: Phải có dòng này thì các cột mới nằm ngang
+    align-items: center;
+    padding: 16px 24px;
+    background-color: #f8f9fa; // Màu nền xám nhẹ chuẩn UI
+    border-bottom: 1px solid $border-color;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase; // Chữ in hoa cho tiêu đề
+    color: $text-light;
+    letter-spacing: 0.5px;
+
+    // Định nghĩa độ rộng các cột (Khớp với Rows bên dưới)
+    .col-name {
+      flex: 2;
+      text-align: left;
+    }
+    .col-price {
+      flex: 1.5;
+      text-align: right;
+    }
+    .col-chart {
+      flex: 1.5;
+      text-align: center;
+    }
+    .col-action {
+      flex: 1;
+      text-align: right;
+    }
+  }
+
+  // --- ROWS (Dòng dữ liệu) ---
+  .market-item-row {
+    display: flex;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid $border-color;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    background-color: #fff;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: $bg-hover;
+      transform: scale(1.005); // Phóng to cực nhẹ tạo cảm giác mượt
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      z-index: 1; // Để nổi lên trên các dòng khác
+      border-color: transparent;
+    }
+
+    // --- RESPONSIVE MOBILE ---
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+      padding: 16px;
+
+      .col-chart {
+        display: none;
+      } // Ẩn biểu đồ
+      .col-name {
+        width: 100%;
+        margin-bottom: 12px;
+        flex: auto;
+      }
+      .col-price {
+        width: 50%;
+        flex: auto;
+        text-align: left !important; // Trên mobile giá nằm bên trái
+        display: flex;
+        flex-direction: column-reverse; // Đảo ngược để giá lên trên %
+      }
+      .col-action {
+        width: 50%;
+        flex: auto;
+        text-align: right;
+      }
+    }
+
+    // 1. Cột Tên Coin
+    .col-name {
+      flex: 2;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .coin-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        // background-color: rgba($primary-green, 0.1); // Bỏ nền tròn, để icon tự nhiên đẹp hơn
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          font-size: 1.8rem;
+          color: $primary-green; // Hoặc màu brand của coin đó
+        }
+      }
+
+      .coin-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .symbol {
+          font-weight: 700;
+          color: $text-main;
+          font-size: 1rem;
+          line-height: 1.2;
+        }
+        .name {
+          font-size: 0.85rem;
+          color: $text-light;
+        }
+      }
+    }
+
+    // 2. Cột Giá
+    .col-price {
+      flex: 1.5;
+      text-align: right;
+
+      .price-value {
+        font-family: 'Roboto Mono', monospace; // Dùng font số để thẳng hàng
+        font-weight: 600;
+        color: $text-main;
+        font-size: 1rem;
+        display: block;
+      }
+      .change-percent {
+        font-size: 0.8rem;
+        font-weight: 500;
+
+        &.up {
+          color: $primary-green;
+        }
+        &.down {
+          color: #dc3545;
+        }
+      }
+    }
+
+    // 3. Cột Biểu đồ (Sparkline giả lập)
+    .col-chart {
+      flex: 1.5;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+
+      .mini-chart-line {
+        height: 6px;
+        width: 80px;
+        background: $chart-gradient; // Dùng Gradient đẹp hơn màu bệt
+        border-radius: 4px;
+        position: relative;
+
+        // Tạo thêm 1 chấm tròn ở cuối biểu đồ cho giống thật
+        &::after {
+          content: '';
+          position: absolute;
+          right: -2px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 8px;
+          height: 8px;
+          background: $primary-green;
+          border-radius: 50%;
+          border: 2px solid #fff;
+        }
+      }
+    }
+
+    // 4. Cột Hành động
+    .col-action {
+      flex: 1;
+      text-align: right;
+
+      .btn-trade {
+        background-color: transparent;
+        border: 1px solid $primary-green;
+        color: $primary-green;
+        font-weight: 600;
+        font-size: 0.85rem;
+        padding: 8px 24px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+
+        &:hover {
+          background-color: $primary-green;
+          color: white;
+          box-shadow: 0 4px 12px rgba($primary-green, 0.3);
+          transform: translateY(-1px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}

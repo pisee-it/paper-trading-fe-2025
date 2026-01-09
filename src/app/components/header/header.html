@@ -1,0 +1,37 @@
+<header class="site-header">
+    <div class="header-content">
+        <div class="header-left">
+            <a routerLink="/" class="brand-logo">
+                <i class="bi bi-currency-exchange logo-icon"></i>
+                <span class="brand-name">PiSee Trading</span>
+            </a>
+
+            <nav class="main-nav">
+                <!-- <a href="#" class="nav-link">Tài khoản ảo 10k$</a> -->
+                <a routerLink="/market" class="nav-link" style="cursor: pointer;">Thị trường</a>
+                <a href="#" class="nav-link">Về chúng tôi</a>
+            </nav>
+        </div>
+
+        <div class="header-right">
+            <div class="tool-item" (click)="toggleLanguageMenu()">
+                <i class="bi bi-globe tool-icon"></i>
+                <span class="tool-text">Tiếng Việt</span>
+
+                <div class="dropdown-menu-custom" *ngIf="showLanguageMenu" (click)="$event.stopPropagation()">
+                    <div class="dropdown-item" (click)="switchLanguage('vi')">
+                        <img src="https://flagcdn.com/vn.svg" width="20" alt="VN Flag"> Tiếng Việt
+                    </div>
+                    <div class="dropdown-item" (click)="switchLanguage('en')">
+                        <img src="https://flagcdn.com/us.svg" width="20" alt="US Flag"> English
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-item" (click)="toggleDarkMode()" aria-label="Toggle Dark Mode">
+                <i class="bi tool-icon" [class.bi-sun-fill]="!isDarkMode" [class.bi-moon-stars-fill]="isDarkMode"></i>
+                <span class="tool-text">{{ isDarkMode ? 'Tối' : 'Sáng' }}</span>
+            </div>
+        </div>
+    </div>
+</header>

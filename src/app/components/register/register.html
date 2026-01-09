@@ -1,47 +1,7 @@
 <div class="register-page-container">
-
-    <header class="site-header">
-        <div class="header-content">
-            <div class="header-left">
-                <a routerLink="/" class="brand-logo">
-                    <i class="bi bi-currency-exchange logo-icon"></i>
-                    <span class="brand-name">PiSee Trading</span>
-                </a>
-                <nav class="main-nav">
-                    <a href="#" class="nav-link">Tài khoản ảo 10k$</a>
-                    <a href="#" class="nav-link">Thị trường</a>
-                    <a href="#" class="nav-link">Về chúng tôi</a>
-                </nav>
-            </div>
-
-            <div class="header-right">
-                <div class="tool-item" (click)="toggleLanguageMenu()">
-                    <i class="bi bi-globe tool-icon"></i>
-                    <span class="tool-text">Tiếng Việt</span>
-                    <div class="dropdown-menu-custom" *ngIf="showLanguageMenu" (click)="$event.stopPropagation()">
-                        <div class="dropdown-item" (click)="switchLanguage('vi')">
-                            <img src="https://flagcdn.com/vn.svg" width="20" alt="VN"> Tiếng Việt
-                        </div>
-                        <div class="dropdown-item" (click)="switchLanguage('en')">
-                            <img src="https://flagcdn.com/us.svg" width="20" alt="US"> English
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tool-item" (click)="toggleDarkMode()">
-                    <i class="bi tool-icon" [class.bi-sun-fill]="!isDarkMode"
-                        [class.bi-moon-stars-fill]="isDarkMode"></i>
-                    <span class="tool-text">{{ isDarkMode ? 'Tối' : 'Sáng' }}</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
     <main class="hero-section">
         <div class="auth-card-wrapper">
-
             <section class="auth-card">
-
                 <header class="card-header">
                     <h1 class="welcome-text">Đăng ký tài khoản</h1>
                     <p class="sub-text">Bắt đầu hành trình đầu tư miễn phí với 10.000$ ảo</p>
@@ -61,7 +21,6 @@
                 </div>
 
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" *ngIf="!successMessage">
-
                     <div class="form-group">
                         <label for="fullName" class="form-label">Họ và Tên</label>
                         <div class="input-group">
@@ -130,7 +89,6 @@
                     <div class="register-prompt">
                         Đã có tài khoản? <a routerLink="/login">Đăng nhập tại đây</a>
                     </div>
-
                 </form>
             </section>
         </div>

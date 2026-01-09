@@ -1,15 +1,15 @@
 // ============================================
-// 1. VARIABLES (Đồng bộ với Login)
+// 1. VARIABLES (GIỮ NGUYÊN)
 // ============================================
-$primary-color: #fcd535; // Binance Yellow
-$primary-hover: #f0b90b;
+$primary-color: #52b36e;
+$primary-hover: #389452;
 $text-main: #1e2329;
 $text-light: #707a8a;
 $bg-body: #fafafa;
 $bg-white: #ffffff;
 $border-color: #eaecef;
 $error-color: #dc3545;
-$success-color: #198754; // Thêm màu xanh cho thông báo thành công
+$success-color: #198754;
 $border-radius: 8px;
 $transition: all 0.2s ease-in-out;
 
@@ -25,132 +25,26 @@ $transition: all 0.2s ease-in-out;
   background-color: $bg-body;
 }
 
-// ============================================
-// 3. HEADER STYLES (Y hệt Login)
-// ============================================
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background-color: $bg-white;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
-
-  .header-content {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1.25rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      color: $text-main;
-      .logo-icon {
-        color: $primary-color;
-        font-size: 1.5rem;
-      }
-    }
-
-    .main-nav {
-      display: flex;
-      gap: 24px;
-      .nav-link {
-        text-decoration: none;
-        color: $text-main;
-        font-weight: 500;
-        transition: $transition;
-        &:hover {
-          color: $primary-hover;
-        }
-      }
-    }
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    .tool-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      position: relative;
-      color: $text-main;
-      &:hover {
-        color: $primary-hover;
-      }
-
-      .tool-icon {
-        font-size: 1.2rem;
-      }
-      .tool-text {
-        font-size: 0.75rem;
-        font-weight: 500;
-      }
-
-      .dropdown-menu-custom {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        margin-top: 12px;
-        background: $bg-white;
-        border-radius: $border-radius;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        min-width: 160px;
-        border: 1px solid $border-color;
-        .dropdown-item {
-          padding: 10px 16px;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          cursor: pointer;
-          font-size: 0.9rem;
-          &:hover {
-            background-color: $bg-body;
-          }
-        }
-      }
-    }
-  }
-}
+// *** ĐÃ XÓA SECTION .site-header ***
 
 // ============================================
-// 4. MAIN BODY & AUTH CARD
+// 4. MAIN BODY & AUTH CARD (Giữ margin-top: 64px)
 // ============================================
 .hero-section {
   flex: 1;
-  margin-top: 64px;
+  // margin-top: 64px; // Quan trọng để không bị header của MainLayout che
+  padding-top: 80px;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  // background: url(...) -> Thêm ảnh nền ở đây nếu muốn
 
   .auth-card-wrapper {
     width: 100%;
     max-width: 1200px;
     display: flex;
-    justify-content: flex-end; // Form nằm bên phải
+    justify-content: flex-end;
 
     @media (max-width: 768px) {
       justify-content: center;
@@ -161,7 +55,7 @@ $transition: all 0.2s ease-in-out;
 .auth-card {
   background: $bg-white;
   width: 100%;
-  max-width: 500px; // Rộng hơn form Login chút xíu (500px) vì nhiều trường hơn
+  max-width: 500px;
   padding: 40px;
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);

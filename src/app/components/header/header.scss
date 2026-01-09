@@ -1,0 +1,143 @@
+// 1. VARIABLES (Phải copy sang đây để Header hiểu màu sắc)
+$primary-color: #52b36e;
+$primary-hover: #389452;
+$text-main: #1e2329;
+$text-light: #707a8a;
+$bg-white: #ffffff;
+$bg-body: #fafafa;
+$border-color: #eaecef;
+$border-radius: 8px;
+$transition: all 0.2s ease-in-out;
+
+// 2. HEADER STYLES (Đoạn này cắt từ Login SCSS sang)
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+
+  // --- CẬP NHẬT PHẦN BACKGROUND ---
+
+  // --- CẬP NHẬT GIAO DIỆN KÍNH & SHADOW ---
+
+  // 1. Màu nền: Trắng đục (Glass effect)
+  background-color: rgba(255, 255, 255, 0.9); // Tăng lên 0.9 cho đỡ bị lẫn vào nội dung
+
+  // 2. Blur: Giữ nguyên
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  // 3. SHADOW (QUAN TRỌNG): Tăng độ đậm và độ lan tỏa
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  // 4. BORDER (QUAN TRỌNG):
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  .header-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      color: $text-main;
+
+      .logo-icon {
+        color: $primary-color;
+        font-size: 1.5rem;
+      }
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 24px;
+
+      .nav-link {
+        text-decoration: none;
+        color: $text-main;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: $transition;
+
+        &:hover {
+          color: $primary-hover;
+        }
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .tool-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      color: $text-main;
+      transition: $transition;
+
+      &:hover {
+        color: $primary-hover;
+      }
+
+      .tool-icon {
+        font-size: 1.2rem;
+      }
+      .tool-text {
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .dropdown-menu-custom {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 12px;
+        background: $bg-white;
+        border-radius: $border-radius;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        min-width: 160px;
+        border: 1px solid $border-color;
+        overflow: hidden;
+
+        .dropdown-item {
+          padding: 10px 16px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+          font-size: 0.9rem;
+          transition: background 0.1s;
+
+          &:hover {
+            background-color: $bg-body;
+          }
+        }
+      }
+    }
+  }
+}
